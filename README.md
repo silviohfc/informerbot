@@ -1,4 +1,4 @@
-# Informer Bot <img style="float: right" src="assets/logo.png" width="100">
+# Informer Bot <img align="right" src="public/logo.png" width="100">
 > Bot para o Discord com a função de emitir comunicados.
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) \
@@ -16,6 +16,13 @@ $ git clone https://github.com/silviohfc/informerbot
 Dentro da pasta instale as dependências:
 ``` 
 $ npm install
+```
+Crie um arquivo com o nome ```config.json``` dentro da pasta ```app``` com este conteúdo:
+```
+{
+    "prefix": "!", // Prefixo para os comandos
+    "token": "insira o token aqui" // Token de autenticação do bot
+}
 ```
 
 ## Exemplo de uso

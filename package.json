@@ -1,0 +1,26 @@
+{
+  "name": "Informer",
+  "version": "1.0.0",
+  "description": "Bot para o Discord com a função de emitir comunicados.",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "nodemon app/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silviohfc/informerbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silviohfc/informerbot/issues"
+  },
+  "homepage": "https://github.com/silviohfc/informerbot#readme"
+}
