@@ -6,7 +6,7 @@
 
 O Informer é um bot cujo a função é enviar comunicados para um ou mais canais de texto dentro de um servidor do Discord, sendo possível criar grupos de canais dependendo do seu objetivo.
 
-![](https://github.com/dbader/readme-template/blob/master/header.png?raw=true)
+![](public/apr.gif)
 
 ## Instalação
 Clone o repositório:
