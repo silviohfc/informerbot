@@ -1,9 +1,10 @@
 const Discord = require('discord.js')
 const { prefix } = require('./config.json')
 const attachment = new Discord.MessageAttachment('public/logo.png', 'logo.png')
+const commands = require('./commands')
 
 module.exports = {
-    cmdChannelId: 0,
+    guilds: [],
     embed: new Discord.MessageEmbed()
         .setColor("#ffffff")
         .setAuthor("Informer")
@@ -15,17 +16,42 @@ module.exports = {
     async init(guild) {
         const channel = await guild.channels.create("informer-commands", { position: 1 })
 
-        this.cmdChannelId = channel.id
+        this.guilds.push({
+            name: guild.name,
+            id: guild.id,
+            cmdChannel: channel.id
+        })
 
         channel.send(this.embed)
     },
 
-    command(cmd, message) {
-        return message.content.startsWith(`${prefix}${cmd}`)
+    command(message) {
+        if (message.author.bot) return
+
+        const commandName = message.content.slice(1)
+
+        const command = commands.find(command => {
+            return command.name == commandName
+        })
+
+        if (!command) return message.reply("me desculpe, mas este comando não existe 😢")
+        
+        message.react('👍')
+        command.exec(message)
     },
 
-    getChannelId() {
-        return this.cmdChannelId
+    verifyCmd(message) {
+        return message.content.startsWith(`${prefix}`)
+    },
+
+    verifyCmdChannel(message) {
+        const guild = this.guilds.find(guild => {
+            return guild.cmdChannel == message.channel.id
+        })
+        
+        if (guild) return true
+
+        return false
     }
 
 }

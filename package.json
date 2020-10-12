@@ -1,5 +1,5 @@
 {
-  "name": "Informer",
+  "name": "informer",
   "version": "1.0.0",
   "description": "Bot para o Discord com a função de emitir comunicados.",
   "main": "index.js",

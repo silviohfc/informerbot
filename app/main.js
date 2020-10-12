@@ -9,9 +9,9 @@ client.on("guildCreate", guild => {
 })
 
 client.on('message', async message => {
-	if(bot.command("info", message)) {
-        message.reply(bot.getChannelId())
+	if(bot.verifyCmd(message)) {
+        bot.command(message)
     }
-});
+})
 
 client.login(token);
