@@ -9,9 +9,7 @@ client.on("guildCreate", guild => {
 })
 
 client.on('message', async message => {
-	if(bot.verifyCmd(message)) {
-        bot.command(message)
-    }
+	bot.command(message.client, message)
 })
 
 client.login(token);

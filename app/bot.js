@@ -1,57 +1,80 @@
 const Discord = require('discord.js')
-const { prefix } = require('./config.json')
 const attachment = new Discord.MessageAttachment('public/logo.png', 'logo.png')
-const commands = require('./commands')
+const fs = require("fs")
 
-module.exports = {
-    guilds: [],
-    embed: new Discord.MessageEmbed()
-        .setColor("#ffffff")
-        .setAuthor("Informer")
-        .setDescription("Acesse a documentação para consultar todas as funções disponíveis aqui.")
-        .attachFiles(attachment)
-        .setThumbnail("attachment://logo.png")
-        .addField("Grupos de Canais","Lista de grupos criados:"),
+const data = require("./data.json")
+const command = require('./message-handler')
 
-    async init(guild) {
-        const channel = await guild.channels.create("informer-commands", { position: 1 })
+const embed = new Discord.MessageEmbed()
+    .setColor("#ffffff")
+    .setAuthor("Informer")
+    .setDescription("Digite !help para verificar os comandos disponíveis.")
+    .attachFiles(attachment)
+    .setThumbnail("attachment://logo.png")
+    .addField("Grupos de Canais","Lista de grupos criados:")
 
-        this.guilds.push({
-            name: guild.name,
-            id: guild.id,
-            cmdChannel: channel.id
+
+function init(guild) {
+    if (!guild.me.hasPermission('ADMINISTRATOR')) return
+
+    let index = 0
+
+    const foundGuild = data.guilds.find((dataGuild, foundIndex) => {
+        if (dataGuild.guildID == guild.id) {
+            index = foundIndex
+            return true
+        }
+    })
+    const foundChannel = guild.channels.cache.find(channel => {
+        return channel.name === "informer-commands"
+    })
+
+    if (!foundGuild && !foundChannel) {
+        guild.channels.create("informer-commands").then(channel => {
+            
+            const newGuild = {
+                name: guild.name,
+                guildID: guild.id,
+                channelID: channel.id,
+                channelGroups: []
+            }
+
+            data.guilds.push(newGuild)
+
+            fs.writeFile("app/data.json", JSON.stringify(data, null, 2), err => {
+                if (err) return console.log("Write file error!")
+
+                return
+            })
+
+            channel.send(embed)
+
         })
 
-        channel.send(this.embed)
-    },
+    } 
+    else if (!foundChannel) {
 
-    command(message) {
-        if (message.author.bot) return
+        guild.channels.create("informer-commands").then(channel => {
+            const newGuild = {
+                ...foundGuild,
+                channelID: channel.id
+            }
 
-        const commandName = message.content.slice(1)
+            data.guilds[index] = newGuild
 
-        const command = commands.find(command => {
-            return command.name == commandName
+            fs.writeFile("app/data.json", JSON.stringify(data, null, 2), err => {
+                if (err) return console.log("Write file error!")
+
+                return
+            })
+
+            channel.send(embed)
         })
-
-        if (!command) return message.reply("me desculpe, mas este comando não existe 😢")
-        
-        message.react('👍')
-        command.exec(message)
-    },
-
-    verifyCmd(message) {
-        return message.content.startsWith(`${prefix}`)
-    },
-
-    verifyCmdChannel(message) {
-        const guild = this.guilds.find(guild => {
-            return guild.cmdChannel == message.channel.id
-        })
-        
-        if (guild) return true
-
-        return false
+   
     }
 
 }
+
+
+
+module.exports = { init, command }

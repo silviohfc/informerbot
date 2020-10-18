@@ -1,0 +1,16 @@
+{
+  "guilds": [
+    {
+      "name": "Servidor de Testes 1",
+      "guildID": "707433119006982234",
+      "channelID": "767279334045515806",
+      "channelGroups": []
+    },
+    {
+      "name": "Servidor de Testes 2",
+      "guildID": "765290860694732860",
+      "channelID": "767277583016001536",
+      "channelGroups": []
+    }
+  ]
+}
