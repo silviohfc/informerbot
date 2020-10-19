@@ -4,12 +4,13 @@ const client = new Discord.Client();
 const { token } = require('./config.json')
 const bot = require('./bot')
 
-client.on("guildCreate", guild => {
-    bot.init(guild)
+// Execute functions inside bot.js like middlewares
+client.on("ready", async () => {
+    bot.registerCommands(client)
 })
 
-client.on('message', async message => {
-	bot.command(message.client, message)
+client.on("guildCreate", guild => {
+    bot.init(guild)
 })
 
 client.login(token);
