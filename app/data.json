@@ -12,16 +12,11 @@
       "channelID": "767277583016001536",
       "channelGroups": [
         {
-          "name": "Principais",
+          "name": "Admin",
           "channels": [
-            "informer-commands",
-            "teste"
-          ]
-        },
-        {
-          "name": "Jogos",
-          "channels": [
-            "avisos"
+            "boss",
+            "admin",
+            "mods"
           ]
         }
       ]

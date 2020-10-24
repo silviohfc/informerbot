@@ -42,6 +42,7 @@ module.exports = (client, commandOptions) => {
                 return
             }
 
+            message.react('👍')
             callback(message, arguments)
             return
             
