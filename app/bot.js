@@ -9,13 +9,24 @@ const data = require("./data.json")
 const channelName = "informer-commands" 
 
 // The embed with de groups to send with messages
-const embed = new Discord.MessageEmbed()
+const embed = {
+    color: "#FFFFFF",
+    author: {
+        name: "Informer"
+    },
+    description: "Digite !help para verificar os comandos disponíveis.",
+    thumbnail: {
+        url: "attachment://logo.png"
+    }
+}
+
+/*const embed = new Discord.MessageEmbed()
     .setColor("#ffffff")
     .setAuthor("Informer")
     .setDescription("Digite !help para verificar os comandos disponíveis.")
     .attachFiles(attachment)
     .setThumbnail("attachment://logo.png")
-    .addField("Grupos de Canais","Lista de grupos criados:")
+    .addField("Grupos de Canais","Lista de grupos criados:")*/
 
 // The function that will create the commands channel and add the server to data.json
 function init(guild) {
@@ -108,4 +119,4 @@ function registerCommands(client) {
 
 
 
-module.exports = { init, registerCommands }
+module.exports = { init, registerCommands, embed, attachment }

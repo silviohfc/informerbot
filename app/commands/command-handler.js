@@ -31,7 +31,7 @@ module.exports = (client, commandOptions) => {
         // Check if the message starts with the prefix
         if (content.toLowerCase().startsWith(`${prefix}${command.toLowerCase()}`)) {
             
-            // Split content on any numeber of blank spaces
+            // Split content with any numeber of blank spaces
             const arguments = content.split(/[ ]+/)
 
             // Remove the command
