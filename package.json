@@ -10,7 +10,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "nodemon --watch app --watch app/commands app/main.js"
+    "start": "nodemon app/main.js"
   },
   "repository": {
     "type": "git",
